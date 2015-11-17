@@ -30,7 +30,9 @@ function assertAnyFiles(fileList, scenarioPath, dirName) {
 
   // Make sure we generated all expected files,
   // and only these files.
-  var expFiles = fs.readdirSync(expImgDir).sort();
+  var expFiles = fs.existsSync(expImgDir)
+    ? fs.readdirSync(expImgDir).sort()
+    : [];
   var obsFiles = fileList.map(function(i) {
     return i.name;
   }).sort();
